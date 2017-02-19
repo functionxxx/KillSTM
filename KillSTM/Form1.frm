@@ -41,9 +41,9 @@ Begin VB.Form Form1
    End
    Begin VB.CommandButton Command2 
       Cancel          =   -1  'True
-      Caption         =   "取消"
+      Caption         =   "退出"
       Height          =   375
-      Left            =   2280
+      Left            =   2400
       TabIndex        =   4
       Top             =   240
       Width           =   975
@@ -51,7 +51,7 @@ Begin VB.Form Form1
    Begin VB.CommandButton Command1 
       Caption         =   "干他一炮"
       Height          =   495
-      Left            =   2280
+      Left            =   2400
       TabIndex        =   3
       Top             =   720
       Width           =   975
@@ -66,8 +66,8 @@ Begin VB.Form Form1
       Begin VB.Timer Timer2 
          Enabled         =   0   'False
          Interval        =   750
-         Left            =   1080
-         Top             =   840
+         Left            =   1800
+         Top             =   960
       End
       Begin VB.TextBox Text1 
          BeginProperty Font 
@@ -88,9 +88,19 @@ Begin VB.Form Form1
          Top             =   360
          Width           =   855
       End
+      Begin VB.Label Label3 
+         Caption         =   "按取消键取消"
+         ForeColor       =   &H000000C0&
+         Height          =   255
+         Left            =   360
+         TabIndex        =   8
+         Top             =   960
+         Visible         =   0   'False
+         Width           =   1815
+      End
       Begin VB.Label Label2 
          BackStyle       =   0  'Transparent
-         ForeColor       =   &H000000C0&
+         ForeColor       =   &H000000FF&
          Height          =   255
          Left            =   360
          TabIndex        =   5
@@ -133,28 +143,110 @@ Private Sec As Integer
 Private background As Integer
 Private sPID As Long
 
-Private Sub Command2_Click()
+Private Sub Form_Initialize()
+     InitCommonControls '启用视觉样式
+     Me.Icon = LoadPicture("")
+End Sub
+
+Private Sub Form_Load()
+      
+     '初始化变量
+ 
+     Min = 0
+
+     Sec = 0
   
-     Unload Me
-     End
+     background = 3
+     
+     Me.Icon = LoadPicture("") 'Hide
+     App.TaskVisible = False
+     
+     DisableAbility Text1 '禁用复制粘贴
+
+End Sub
+
+'Fuck
+Private Sub Command1_Click()
+     
+     If Text1.Text = "" Then
+         Label2.Caption = "请输入数字!"
+     
+     ElseIf Text1.Text = 0 Then
+         Label2.Caption = "请输入非零值!"
+     
+     Else
+     
+         sPID = GetPsPid("StudentMain.exe") '获取学生端进程PID
+         
+         If sPID = 0 Then
+         
+             MsgBox "屏幕控制程序未开启或已退出", 64, "无需结束"
+             
+         Else '进程存在
+     
+             Timer2.Enabled = True '进入预备状态
+             Label2.Caption = "即将转入后台待命!..." & background & "s"
+             Command2.Caption = "取消"
+             Command1.Enabled = False
+             Command3.Enabled = False
+             Command4.Enabled = False
+             Text1.Enabled = False
+             Label3.Visible = True
+             
+         End If
+     
+     End If
+     
+End Sub
+
+Private Sub Command2_Click()
+     
+     If Timer2.Enabled = True Then '取消预备状态
+  
+         Timer2.Enabled = False
+         Label3.Visible = False
+         Command1.Enabled = True
+         Command3.Enabled = True
+         Command4.Enabled = True
+         Text1.Enabled = True
+         Command2.Caption = "退出"
+         Label2.Caption = ""
+         background = 3 '重置任务倒计时
+         
+     Else '非预备状态则退出
+         
+         Unload Me
+         End
+         
+     End If
   
 End Sub
 
 Private Sub Command3_Click()
-
+     
      On Error Resume Next
      
-     Shell "ntsd /p " & sPID, vbHide '直接结束
+     sPID = GetPsPid("StudentMain.exe") '获取学生端进程PID
      
-     If Err.Number = 0 Then
+     If sPID = 0 Then
          
-         MsgBox "结束成功!", 64, "Killed"
+         MsgBox "屏幕控制程序未开启或已退出", 64, "无需结束"
+         
+     Else '进程存在
      
-     Else
+         Shell "ntsd /p " & sPID, vbHide '直接结束
+     
+         If Err.Number = 0 Then
          
-         MsgBox "找不到文件ntsd.exe,程序无法继续运行!", 16, "错误"
-         Unload Me
-         End
+             MsgBox "结束成功!", 64, "Killed"
+     
+         Else
+         
+             MsgBox "找不到文件ntsd.exe,程序无法继续运行!", 16, "错误"
+             Unload Me
+             End
+         
+         End If
          
      End If
 
@@ -174,32 +266,22 @@ Private Sub Command4_Click() '获取管理员密码
          
      Else
          
-         MsgBox pwd
+         MsgBox "管理员密码为:" & vbCrLf & pwd, 64, "获取成功"
          
      End If
      
 End Sub
 
-Private Sub Form_Initialize()
-     InitCommonControls '启用视觉样式
-     Me.Icon = LoadPicture("")
-End Sub
-
-'Fuck
-Private Sub Command1_Click()
+Private Sub Text1_Change()
      
      If Text1.Text = "" Then
-         Label2.Caption = "请输入数字!"
-     
-     ElseIf Text1.Text = 0 Then
-         Label2.Caption = "请输入非零值!"
-     
+         Command1.Enabled = False
+         
      Else
-         Timer2.Enabled = True
-         Label2.Caption = "已转入后台待命!..." & background & "s"
-     
+         Command1.Enabled = True
+         
      End If
-     
+
 End Sub
 
 '限制输入数字
@@ -250,23 +332,6 @@ Private Sub Text1_KeyPress(KeyAscii As Integer)
   
 End Sub
 
-Private Sub Form_Load()
-      
-     '初始化变量
- 
-     Min = 0
-
-     Sec = 0
-  
-     background = 3
-     
-     Me.Icon = LoadPicture("") 'Hide
-     App.TaskVisible = False
-     
-     sPID = GetPsPid("StudentMain.exe") '获取学生端进程PID
-
-End Sub
-
 Private Sub Timer1_Timer()
      
      On Error Resume Next
@@ -278,7 +343,8 @@ Private Sub Timer1_Timer()
          Min = Min + 1
          
          If Min = Text1.Text Then '达到指定时间结束StudentMain.exe进程
-             
+         
+             sPID = GetPsPid("StudentMain.exe") '获取学生端进程PID
              Shell "ntsd /p " & sPID, vbHide
              
              If Err.Number = 0 Then
@@ -289,6 +355,7 @@ Private Sub Timer1_Timer()
                  '清零计时变量
                  Min = 0
                  Sec = 0
+                 background = 3
                  Text1.Text = 0
              
                  Me.Show '显示窗体
@@ -320,17 +387,23 @@ Private Sub Timer2_Timer()
      If background = 0 Then
          Timer2.Enabled = False
          Timer1.Enabled = True
-         Label1.Caption = ""
+         Label2.Caption = ""
+         Label3.Visible = False
+         Text1.Enabled = True
+         Command1.Enabled = True
+         Command2.Caption = "退出"
+         Command3.Enabled = True
+         Command4.Enabled = True
          Me.Hide
      
      Else
-         Label2.Caption = "已转入后台待命!..." & background & "s"
+         Label2.Caption = "即将转入后台待命!..." & background & "s"
      
      End If
 
 End Sub
 
 'Create By @functionxxx
-'Create Date: Feb 17, 2017
-'Update Date: Feb 19, 2017
+'Create Date: Feb 17, 2017 15:40
+'Update Date: Feb 19, 2017 22:51
 'enjoy it
