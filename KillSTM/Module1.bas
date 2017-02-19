@@ -1,4 +1,4 @@
-Attribute VB_Name = "Module1"
+Attribute VB_Name = "GetPID"
 Option Explicit
 Private Declare Function CreateToolhelp32Snapshot _
                 Lib "kernel32" (ByVal dwFlags As Long, _
@@ -31,6 +31,7 @@ Private Type PROCESSENTRY32
     szExeFile As String * 260
 End Type
 Const PROCESS_TERMINATE = 1
+
 Function GetPsPid(sProcess As String) As Long
     Dim lSnapShot    As Long
     Dim lNextProcess As Long
@@ -60,6 +61,6 @@ Function GetPsPid(sProcess As String) As Long
 End Function
 
 'Create By @functionxxx
-'Create Date: Feb 18, 2017
-'Update Date: Feb 19, 2017
+'Create Date: Feb 18, 2017 14:32
+'Update Date: Feb 18, 2017 14:32
 'enjoy it
