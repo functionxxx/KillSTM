@@ -180,22 +180,44 @@ End Sub
 
 Private Sub Form_Load()
 
-     EnableShutDown '打开关机权限
-      
-     '初始化变量
- 
-     Min = 0
+     Dim mehwnd As Long
+     mehwnd = GetSetting("KillSTM", "Settings", "mehwnd", 0)
+     
+     If mehwnd = 0 Then
+     
+         SaveSetting "KillSTM", "Settings", "mehwnd", Me.HWnd '记录当前窗体HWnd
 
-     Sec = 0
+         EnableShutDown '打开关机权限
+      
+         '初始化变量
+ 
+         Min = 0
+
+         Sec = 0
   
-     background = 3
+         background = 3
      
-     Me.Icon = LoadPicture("") 'Hide
-     App.TaskVisible = False
+         Me.Icon = LoadPicture("") 'Hide
+         App.TaskVisible = False
      
-     DisableAbility Text1 '禁用复制粘贴
+         DisableAbility Text1 '禁用复制粘贴
+         
+     Else
+     
+         MsgBox "已有一个实例正在运行!", 48, "KillSTM"
+         
+         End
+         
+     End If
 
 End Sub
+
+Private Sub Form_Unload(Cancel As Integer)
+
+     SaveSetting "KillSTM", "Settings", "mehwnd", 0 '清空注册表HWnd记录
+
+End Sub
+
 
 'Fuck
 Private Sub Command1_Click()
@@ -223,8 +245,8 @@ Private Sub Command1_Click()
      
                  Timer2.Enabled = True '进入预备状态
                  Label2.Caption = "即将转入后台待命!..." & background & "s"
-                 Command2.Caption = "取消"
                  Command1.Enabled = False
+                 Command2.Caption = "取消"
                  Command3.Enabled = False
                  Command4.Enabled = False
                  Command5.Enabled = False
@@ -252,13 +274,13 @@ Private Sub Command2_Click()
          Timer2.Enabled = False
          Label3.Visible = False
          Command1.Enabled = True
+         Command2.Caption = "退出"
          Command3.Enabled = True
          Command4.Enabled = True
          Command5.Enabled = True
          Command6.Enabled = True
          Command7.Enabled = True
          Text1.Enabled = True
-         Command2.Caption = "退出"
          Label2.Caption = ""
          background = 3 '重置任务倒计时
          
@@ -526,5 +548,5 @@ End Sub
 
 'Create By @functionxxx
 'Create Date: Feb 17, 2017 15:40
-'Update Date: Feb 23, 2017 22:26
+'Update Date: Feb 24, 2017 21:56
 'enjoy it
