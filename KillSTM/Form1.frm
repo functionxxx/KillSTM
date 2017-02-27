@@ -114,7 +114,7 @@ Begin VB.Form Form1
          EndProperty
          Height          =   270
          IMEMode         =   3  'DISABLE
-         Left            =   360
+         Left            =   240
          MaxLength       =   2
          TabIndex        =   1
          Text            =   "0"
@@ -125,7 +125,7 @@ Begin VB.Form Form1
          Caption         =   "按取消键取消"
          ForeColor       =   &H000000C0&
          Height          =   255
-         Left            =   360
+         Left            =   240
          TabIndex        =   8
          Top             =   960
          Visible         =   0   'False
@@ -135,7 +135,7 @@ Begin VB.Form Form1
          BackStyle       =   0  'Transparent
          ForeColor       =   &H000000FF&
          Height          =   255
-         Left            =   360
+         Left            =   240
          TabIndex        =   5
          Top             =   720
          Width           =   2175
@@ -152,7 +152,7 @@ Begin VB.Form Form1
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Left            =   1320
+         Left            =   1200
          TabIndex        =   2
          Top             =   480
          Width           =   375
@@ -176,16 +176,14 @@ Private Min As Integer, Sec As Integer, background As Integer, sPID As Long
 Private Sub Form_Initialize()
      InitCommonControls '启用视觉样式
      Me.Icon = LoadPicture("")
+     App.Title = "KillSTM"
 End Sub
 
 Private Sub Form_Load()
 
-     Dim mehwnd As Long
-     mehwnd = GetSetting("KillSTM", "Settings", "mehwnd", 0)
+     '判断是否已有实例正在运行
      
-     If mehwnd = 0 Then
-     
-         SaveSetting "KillSTM", "Settings", "mehwnd", Me.HWnd '记录当前窗体HWnd
+     If App.PrevInstance = False Then
 
          EnableShutDown '打开关机权限
       
@@ -202,9 +200,10 @@ Private Sub Form_Load()
      
          DisableAbility Text1 '禁用复制粘贴
          
-     Else
+     ElseIf App.PrevInstance = True Then
      
          MsgBox "已有一个实例正在运行!", 48, "KillSTM"
+         AppActivate App.Title '激活已有实例
          
          End
          
@@ -294,7 +293,7 @@ Private Sub Command2_Click()
 End Sub
 
 Private Sub Command4_Click() '获取管理员密码
-     
+
      On Error Resume Next
      
      Dim pwd As String
@@ -548,5 +547,5 @@ End Sub
 
 'Create By @functionxxx
 'Create Date: Feb 17, 2017 15:40
-'Update Date: Feb 24, 2017 21:56
+'Update Date: Feb 26, 2017 14:30
 'enjoy it
