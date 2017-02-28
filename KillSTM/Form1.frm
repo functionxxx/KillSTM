@@ -2,28 +2,45 @@ VERSION 5.00
 Begin VB.Form Form1 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "去你的屏幕控制"
-   ClientHeight    =   3525
+   ClientHeight    =   3975
    ClientLeft      =   45
    ClientTop       =   420
    ClientWidth     =   3615
-   BeginProperty Font 
-      Name            =   "微软雅黑"
-      Size            =   9
-      Charset         =   134
-      Weight          =   400
-      Underline       =   0   'False
-      Italic          =   0   'False
-      Strikethrough   =   0   'False
-   EndProperty
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   3525
+   ScaleHeight     =   3975
    ScaleWidth      =   3615
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  '屏幕中心
+   Begin VB.CommandButton Command8 
+      Caption         =   "修改管理员密码"
+      BeginProperty Font 
+         Name            =   "微软雅黑"
+         Size            =   9
+         Charset         =   134
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   375
+      Left            =   240
+      TabIndex        =   12
+      Top             =   3480
+      Width           =   3135
+   End
    Begin VB.CommandButton Command7 
       Caption         =   "切换到免控频道"
+      BeginProperty Font 
+         Name            =   "微软雅黑"
+         Size            =   9
+         Charset         =   134
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Left            =   1920
       TabIndex        =   11
@@ -32,6 +49,15 @@ Begin VB.Form Form1
    End
    Begin VB.CommandButton Command6 
       Caption         =   "破解进程保护"
+      BeginProperty Font 
+         Name            =   "微软雅黑"
+         Size            =   9
+         Charset         =   134
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Left            =   240
       TabIndex        =   10
@@ -40,6 +66,15 @@ Begin VB.Form Form1
    End
    Begin VB.CommandButton Command5 
       Caption         =   "直接关闭屏幕控制程序"
+      BeginProperty Font 
+         Name            =   "微软雅黑"
+         Size            =   9
+         Charset         =   134
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Left            =   240
       TabIndex        =   9
@@ -48,6 +83,15 @@ Begin VB.Form Form1
    End
    Begin VB.CommandButton Command4 
       Caption         =   "获取管理员密码"
+      BeginProperty Font 
+         Name            =   "微软雅黑"
+         Size            =   9
+         Charset         =   134
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Left            =   240
       TabIndex        =   7
@@ -75,6 +119,15 @@ Begin VB.Form Form1
    Begin VB.CommandButton Command2 
       Cancel          =   -1  'True
       Caption         =   "退出"
+      BeginProperty Font 
+         Name            =   "微软雅黑"
+         Size            =   9
+         Charset         =   134
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Left            =   2400
       TabIndex        =   4
@@ -83,6 +136,15 @@ Begin VB.Form Form1
    End
    Begin VB.CommandButton Command1 
       Caption         =   "干他一炮"
+      BeginProperty Font 
+         Name            =   "微软雅黑"
+         Size            =   9
+         Charset         =   134
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   495
       Left            =   2400
       TabIndex        =   3
@@ -91,6 +153,15 @@ Begin VB.Form Form1
    End
    Begin VB.Frame Frame1 
       Caption         =   "倒计时关闭"
+      BeginProperty Font 
+         Name            =   "微软雅黑"
+         Size            =   9
+         Charset         =   134
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   1335
       Left            =   120
       TabIndex        =   0
@@ -103,15 +174,6 @@ Begin VB.Form Form1
          Top             =   960
       End
       Begin VB.TextBox Text1 
-         BeginProperty Font 
-            Name            =   "宋体"
-            Size            =   9
-            Charset         =   134
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
          Height          =   270
          IMEMode         =   3  'DISABLE
          Left            =   240
@@ -123,6 +185,15 @@ Begin VB.Form Form1
       End
       Begin VB.Label Label3 
          Caption         =   "按取消键取消"
+         BeginProperty Font 
+            Name            =   "微软雅黑"
+            Size            =   9
+            Charset         =   134
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          ForeColor       =   &H000000C0&
          Height          =   255
          Left            =   240
@@ -133,6 +204,15 @@ Begin VB.Form Form1
       End
       Begin VB.Label Label2 
          BackStyle       =   0  'Transparent
+         BeginProperty Font 
+            Name            =   "微软雅黑"
+            Size            =   9
+            Charset         =   134
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          ForeColor       =   &H000000FF&
          Height          =   255
          Left            =   240
@@ -142,15 +222,6 @@ Begin VB.Form Form1
       End
       Begin VB.Label Label1 
          Caption         =   "min"
-         BeginProperty Font 
-            Name            =   "宋体"
-            Size            =   9
-            Charset         =   134
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
          Height          =   255
          Left            =   1200
          TabIndex        =   2
@@ -173,6 +244,11 @@ Attribute VB_Exposed = False
 Private Declare Sub InitCommonControls Lib "comctl32.dll" ()
 Private Min As Integer, Sec As Integer, background As Integer, sPID As Long
 
+Private Sub Command8_Click()
+     Form2.Show
+     Me.Enabled = False
+End Sub
+
 Private Sub Form_Initialize()
      InitCommonControls '启用视觉样式
      Me.Icon = LoadPicture("")
@@ -180,19 +256,16 @@ Private Sub Form_Initialize()
 End Sub
 
 Private Sub Form_Load()
-
+     
      '判断是否已有实例正在运行
      
      If App.PrevInstance = False Then
-
+     
          EnableShutDown '打开关机权限
-      
+     
          '初始化变量
- 
          Min = 0
-
          Sec = 0
-  
          background = 3
      
          Me.Icon = LoadPicture("") 'Hide
@@ -210,13 +283,6 @@ Private Sub Form_Load()
      End If
 
 End Sub
-
-Private Sub Form_Unload(Cancel As Integer)
-
-     SaveSetting "KillSTM", "Settings", "mehwnd", 0 '清空注册表HWnd记录
-
-End Sub
-
 
 'Fuck
 Private Sub Command1_Click()
@@ -251,6 +317,7 @@ Private Sub Command1_Click()
                  Command5.Enabled = False
                  Command6.Enabled = False
                  Command7.Enabled = False
+                 Command8.Enabled = False
                  Text1.Enabled = False
                  Label3.Visible = True
                  
@@ -279,6 +346,7 @@ Private Sub Command2_Click()
          Command5.Enabled = True
          Command6.Enabled = True
          Command7.Enabled = True
+         Command8.Enabled = True
          Text1.Enabled = True
          Label2.Caption = ""
          background = 3 '重置任务倒计时
@@ -536,6 +604,7 @@ Private Sub Timer2_Timer()
          Command5.Enabled = True
          Command6.Enabled = True
          Command7.Enabled = True
+         Command8.Enabled = True
          Me.Hide
      
      Else
@@ -547,5 +616,5 @@ End Sub
 
 'Create By @functionxxx
 'Create Date: Feb 17, 2017 15:40
-'Update Date: Feb 26, 2017 14:30
+'Update Date: Feb 26, 2017 23:17
 'enjoy it
