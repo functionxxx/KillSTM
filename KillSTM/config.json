@@ -1,0 +1,130 @@
+{
+  "inbounds": [
+  {
+    "port": 443,
+    "protocol": "vmess",
+    "settings": {
+      "clients": [
+        {
+          "id": "858fab17-b7ef-4208-bb85-0ed95fc046d1",
+          "level": 0,
+          "alterId": 16
+        }
+      ],
+	  "disableInsecureEncryption": true
+    }
+  },
+  
+  {
+    "port": 7641,
+    "protocol": "vmess",
+    "settings": {
+      "clients": [
+        {
+          "id": "aa932ef4-c537-402b-aea1-a253bbafe418",
+          "level": 0,
+          "alterId": 16
+        }
+      ],
+	  "disableInsecureEncryption": true
+    },
+	"streamSettings": {
+	      "network":"kcp",
+		  "security":"none",
+		  "kcpSettings":{
+		          "mtu": 1350,
+				  "tti": 50,
+				  "uplinkCapacity": 20,
+				  "downlinkCapacity": 10,
+				  "congestion": false,
+				  "readBufferSize": 1,
+				  "writeBufferSize": 1,
+				  "header": {
+				          "type": "wechat-video"
+				  }
+		  }
+	}
+  },
+  
+  {
+    "port": 6295,
+    "protocol": "vmess",
+    "settings": {
+      "clients": [
+        {
+          "id": "651d00f5-91d6-4793-b5ea-7d2024a75d4a",
+          "level": 0,
+          "alterId": 16
+        }
+      ],
+	  "disableInsecureEncryption": true
+    },
+	"streamSettings": {
+	      "network":"kcp",
+		  "security":"none",
+		  "kcpSettings":{
+		          "mtu": 1350,
+				  "tti": 50,
+				  "uplinkCapacity": 20,
+				  "downlinkCapacity": 10,
+				  "congestion": false,
+				  "readBufferSize": 1,
+				  "writeBufferSize": 1,
+				  "header": {
+				          "type": "wechat-video"
+				  }
+		  }
+	}
+  },
+  
+  {
+    "port": 6716,
+    "protocol": "vmess",
+    "settings": {
+      "clients": [
+	    {
+          "id": "c8381715-0611-4662-9ad3-5cce09d63d8f",
+          "level": 0,
+          "alterId": 16
+        }
+      ],
+	  "disableInsecureEncryption": true
+    },
+	"streamSettings": {
+	      "network":"kcp",
+		  "security":"none",
+		  "kcpSettings":{
+		          "mtu": 1350,
+				  "tti": 50,
+				  "uplinkCapacity": 20,
+				  "downlinkCapacity": 10,
+				  "congestion": false,
+				  "readBufferSize": 1,
+				  "writeBufferSize": 1,
+				  "header": {
+				          "type": "wechat-video"
+				  }
+		  }
+	}
+  }
+
+  ],
+  
+  "outbounds": [{
+    "protocol": "freedom",
+    "settings": {}
+  },{
+    "protocol": "blackhole",
+    "settings": {},
+    "tag": "blocked"
+  }],
+  "routing": {
+    "rules": [
+      {
+        "type": "field",
+        "ip": ["geoip:private"],
+        "outboundTag": "blocked"
+      }
+    ]
+  }
+}
